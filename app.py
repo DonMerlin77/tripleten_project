@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+import plotly.subplots as sp
 
 df = pd.read_csv('vehicles_us.csv')
 
@@ -83,8 +84,6 @@ four_wd_hist.update_layout(
 st.plotly_chart(four_wd_hist)
 
 st.write('This will compare the number of cars per odometer readings and the price of a car per the odometer.')
-
-import plotly.subplots as sp
 
 df_grouped = df_price_filter.groupby('odometer').agg(
     car_count=('price', 'size'),
