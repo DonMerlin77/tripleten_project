@@ -23,15 +23,20 @@ price_counts.columns = ['price', 'count']
 use_color = st.checkbox("Color by Count", value=True)
 
 if use_color:
-    fig = px.scatter(price_counts, x='price', y='count', 
-                     title='Price Distribution', 
-                     labels={'price': 'Price', 'count': 'Frequency'},
-                     color='count', 
-                     color_continuous_scale='Viridis')
+    # Convert count into a categorical variable by binning (optional)
+    price_counts['count_bin'] = pd.qcut(price_counts['count'], q=5, duplicates='drop')  
+
+    fig = px.histogram(price_counts, x='price', y='count',
+                       title='Price Distribution',
+                       labels={'price': 'Price', 'count': 'Frequency'},
+                       color='count_bin',  # Use binned count for color
+                       nbins=100,  # Adjust bin count as needed
+                       color_discrete_sequence=px.colors.sequential.Viridis)
 else:
-    fig = px.scatter(price_counts, x='price', y='count', 
-                     title='Price Distribution', 
-                     labels={'price': 'Price', 'count': 'Frequency'})
+    fig = px.histogram(price_counts, x='price', y='count',
+                       title='Price Distribution',
+                       labels={'price': 'Price', 'count': 'Frequency'},
+                       nbins=50)
 
 fig.update_layout(
     xaxis_title="Price",
@@ -98,7 +103,7 @@ odo.add_trace(
 )
 
 odo.add_trace(
-    px.histogram(df_grouped, x='odometer', y='total_price', histfunc='sum').data[0],
+    px.scatter(df_grouped, x='odometer', y='total_price').data[0], 
     row=1, col=2
 )
 
