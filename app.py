@@ -5,7 +5,7 @@ import plotly.subplots as sp
 
 df = pd.read_csv('vehicles_us.csv')
 
-df['odometer']= df['odometer'].fillna(df['odometer'].median())
+df['odometer']= df['odometer'].fillna(df.groupby(['model', 'model_year'])['odometer'].transform('median'))
 df['odometer'].isnull().sum()
 
 df['is_4wd']= df['is_4wd'].fillna(0)
