@@ -1,8 +1,25 @@
-# tripleten_project
-For sprint 4 of TripleTen bootcamp
+# Used Car Price Explorer
 
-The purpose of the app is to display data for vehicles in the US and to see how the price can fluxuate based on either the odometer reading and 4wd. As well as look at the spread of the conditions of the cars. We can toggle the color for the price scattorplot, we can pick which 4wd histogram we are looking at either is 4wd, not 4wd, or both at the same time. The odometer section will display two histograms side by side to compare number of cars and odometer reading; as well as, total sum of price of cars per odometer reading.
+A Streamlit web app for exploring US used-car listings (`vehicles_us.csv`): how prices are distributed and how they relate to
+condition, drivetrain and mileage. Built for TripleTen's Sprint 4 (software development tools).
 
-How to use the app.py locally: In your terminal using vs code, or whichever source code editor of your choosing, type in streamlit run app.py. This will allow you to run the app on a localhost browser where you can interact with the the toggles and look at the data. It will say http://0.0.0.0:10000 but you may need to use http://localhost:10000 if that doesn't work. 
+**Live app:** https://tripleten-project-sprint-4.onrender.com (free hosting; the first load can take up to a minute
+while the server wakes up)
 
-https://tripleten-project-sprint-4.onrender.com #updated
+## What it shows
+- **Price distribution:** how many cars are listed at each price, with a toggle to color the bars by count.
+- **Condition:** the number of cars in each listed condition.
+- **Four-wheel drive:** price histograms for 4wd, not 4wd, or both overlaid (two toggles).
+- **Odometer:** two charts side by side, the number of cars and the total listed price per odometer reading.
+
+The exploratory analysis behind the app is in `Notebooks/EDA.ipynb`.
+
+## Run it locally
+```
+pip install -r requirements.txt
+streamlit run app.py
+```
+Then open http://localhost:10000 (the port is set in `.streamlit/config.toml`).
+
+## Stack
+Python, pandas, Plotly, Streamlit; deployed on Render.
